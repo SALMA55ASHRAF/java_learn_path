@@ -1,0 +1,33 @@
+import java.io.*;
+import javax.sound.sampled.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+import java.util.Scanner;
+
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitespace characters in your code.
+public class Main {
+    public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        File f=new File("mixkit-classic-alarm-995 (1).wav");
+        Scanner scan=new Scanner(System.in);
+        AudioInputStream ads= AudioSystem.getAudioInputStream(f);
+        Clip c=AudioSystem.getClip();
+        c.open(ads);
+        String r="";
+        while(!r.equals("Q")){
+            System.out.println("enter s:stop p:play r:restart q:quit");
+            r=scan.next();
+            r=r.toUpperCase();
+            switch(r){
+                case "S":c.stop();break;
+                case "P":c.start();break;
+                case "R":c.setMicrosecondPosition(0);break;//kda rg3na el song mn elawl
+                case "Q":c.close();break;
+                default:
+                    System.out.println("no enter one of them");
+            }
+        }
+        System.out.println("you quit");
+        
+    }
+}
